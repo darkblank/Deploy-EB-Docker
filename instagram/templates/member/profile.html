@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block content %}
+    username : {{ target_user.username }}<br>
+    nickname : {{ target_user.nickname }}<br>
+    사진 : <img src="{% if target_user.img_profile %}{{ target_user.img_profile.url }}{% else %}''{% endif %}" alt=""><br>
+    포스트 목록 :
+    {% for post in target_user.post_set.all %}
+        <div><img src="{{ post.photo.url }}" alt=""></div>
+    {% endfor %}
+    {% if target_user != request.user %}
+        <div>
+            <form action="{% url 'member:follow_toggle' user_pk=target_user.pk %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-default btn-xs">
+                    {% if target_user in request.user.following_users.all %}
+                        팔로우해제
+                    {% else %}
+                        팔로우
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+    {% endif %}
+    <div>
+        팔로잉 :
+        {% for following_user in target_user.following_users.all %}
+            <div>{{ following_user }}</div>
+        {% endfor %}
+    </div>
+    <div>
+        팔로워 :
+        {% for follower in target_user.followers.all %}
+            <div>{{ follower }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
