@@ -22,9 +22,10 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Config paths
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
-with open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json'), 'rt') as f:
-    config_secret_common_str = f.read()
-config_secret_common = json.loads(config_secret_common_str)
+CONFIG_SECRET_COMMON_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_common.json')
+CONFIG_SECRET_DEV_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_dev.json')
+CONFIG_SECRET_DEPLOY_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_deploy.json')
+config_secret_common = json.loads(open(CONFIG_SECRET_COMMON_FILE).read())
 
 # Static paths
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
@@ -41,7 +42,6 @@ FACEBOOK_SCOPE = [
     'public_profile',
     'email',
 ]
-
 
 # Auth
 AUTH_USER_MODEL = 'member.User'
@@ -118,3 +118,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 DEBUG = True
+SECRET_KEY = config_secret_common['django']['secret_key']

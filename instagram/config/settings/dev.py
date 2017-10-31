@@ -1,5 +1,7 @@
 from .base import *
 
+config_secret = json.loads(open(CONFIG_SECRET_DEV_FILE).read())
+
 # AWS
 AWS_ACCESS_KEY_ID = config_secret_common['aws']['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = config_secret_common['aws']['AWS_SECRET_ACCESS_KEY']
@@ -14,3 +16,6 @@ MEDIAFILES_LOCATION = 'media'
 # S3 FileStorage
 DEFAULT_FILE_STORAGE = 'config.storages.DefaultStorage'
 STATICFILES_STORAGE = 'config.storages.StaticStorage'
+
+# Databases
+DATABASES = config_secret['django']['databases']
