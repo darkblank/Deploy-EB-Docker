@@ -31,6 +31,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
 # Facebook
 FACEBOOK_APP_ID = config_secret_common['facebook']['app_id']
@@ -41,18 +42,6 @@ FACEBOOK_SCOPE = [
     'email',
 ]
 
-# AWS
-AWS_ACCESS_KEY_ID = config_secret_common['aws']['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = config_secret_common['aws']['AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = config_secret_common['aws']['AWS_STORAGE_BUCKET_NAME']
-
-# AWS Storage
-STATICFILES_LOCATION = 'static'
-MEDIAFILES_LOCATION = 'media'
-
-# S3 FileStorage
-DEFAULT_FILE_STORAGE = 'config.storages.DefaultStorage'
-STATICFILES_STORAGE = 'config.storages.StaticStorage'
 
 # Auth
 AUTH_USER_MODEL = 'member.User'
