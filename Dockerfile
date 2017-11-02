@@ -1,4 +1,4 @@
-FROM        base
+FROM        azelf/base
 MAINTAINER  darkblank1990@gmail.com
 
 # pip
