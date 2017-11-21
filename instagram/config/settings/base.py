@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 
+import raven
+
 # 장고 내부의 로그인 데코레이션 쓸 경우 연결되어지는 url의 변경
 LOGIN_URL = 'member:log_in'
 
@@ -70,7 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'raven.contrib.django.raven_compat',
     'django_extensions',
     'storages',
 
@@ -119,3 +121,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 DEBUG = True
 SECRET_KEY = config_secret_common['django']['secret_key']
+
+RAVEN_CONFIG = {
+    'dsn': 'https://81e58510d41244699f54ff5d9db363e8:85fea6c5313e47c0868d3fc2dffa7d76@sentry.io/248302',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
